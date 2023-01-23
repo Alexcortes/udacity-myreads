@@ -1,7 +1,9 @@
 import { Link } from "react-router-dom";
 import BookItem from "./BookItem";
+import {availableShelves} from "./constants"
+import PropTypes from "prop-types";
 
-const MainPage = ({ books, shelfs, onMoveToShelf }) => {
+const MainPage = ({ books, onMoveToShelf }) => {
     return (
         <div className="list-books">
             <div className="list-books-title">
@@ -10,7 +12,7 @@ const MainPage = ({ books, shelfs, onMoveToShelf }) => {
                 <div className="list-books-content">
                     <div>
                         {
-                            shelfs.map(shelf => {
+                            availableShelves.map(shelf => {
                                 return (
                                 <div key={shelf.id} className="bookshelf">
                                     <h2 className="bookshelf-title">{ shelf.label }</h2>
@@ -39,5 +41,10 @@ const MainPage = ({ books, shelfs, onMoveToShelf }) => {
         </div>
     );
 }
+
+MainPage.propTypes = {
+    onMoveToShelf: PropTypes.func.isRequired,
+    books: PropTypes.array.isRequired,
+};
 
 export default MainPage;

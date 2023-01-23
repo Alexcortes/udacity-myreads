@@ -9,17 +9,6 @@ import BookDetail from "./BookDetail";
 function App() {
   const [books, setBooks] = useState([]);
 
-  const shelfs = [{
-    id: "currentlyReading",
-    label: "Currently Reading"
-  },{
-    id: "wantToRead",
-    label: "Want to Read"
-  },{
-    id: "read",
-    label: "Read"
-  }];
-
   useEffect(() => {
     getBooks();
   },[]);
@@ -41,7 +30,7 @@ function App() {
       newBookState[bookIndex].shelf = e.target.value;
       console.log(newBookState[bookIndex]);
     }else{
-      newBookState.push({ ...book, shelf: e.target.value });
+      newBookState.concat([{ ...book, shelf: e.target.value }]);
     }
 
     setBooks([...newBookState]);
@@ -52,10 +41,10 @@ function App() {
   return (
     <Routes>
       <Route exact path="/" element={
-         <MainPage books={books} shelfs={shelfs} onMoveToShelf={onMoveToShelf} />
+         <MainPage books={books} onMoveToShelf={onMoveToShelf} />
       } />
       <Route exact path="/search" element={
-         <SearchPage onMoveToShelf={onMoveToShelf} />
+         <SearchPage onMoveToShelf={onMoveToShelf} books={books} />
       } />
       <Route exact path="/detail/:id" element={
          <BookDetail onMoveToShelf={onMoveToShelf} />

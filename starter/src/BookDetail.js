@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import * as BooksApi from "./BooksAPI"
 import { useEffect, useState } from "react";
+import PropTypes from "prop-types";
 
 const BookDetail = ({ onMoveToShelf }) => {
     let { id } = useParams();
@@ -70,5 +71,9 @@ const BookDetail = ({ onMoveToShelf }) => {
         </div>
     );
 }
+
+BookDetail.propTypes = {
+    onMoveToShelf: PropTypes.func.isRequired,
+};
 
 export default BookDetail;

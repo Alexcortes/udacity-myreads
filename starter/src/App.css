@@ -253,3 +253,12 @@ body,
   opacity: 0;
   cursor: pointer;
 }
+
+.empty-book-search{
+  margin-top: 7%;
+  text-align: center;
+}
+
+.empty-book-search p{
+  font-size: 22px;
+}

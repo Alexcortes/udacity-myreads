@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
-
+import {availableShelves} from "./constants"
+import PropTypes from "prop-types";
 
 const BookItem = ({ book, onMoveToShelf }) => {
     let navigate = useNavigate();
@@ -13,19 +14,19 @@ const BookItem = ({ book, onMoveToShelf }) => {
                     style={{
                         width: 128,
                         height: 193,
-                        backgroundImage: `url("${book.imageLinks.thumbnail}")`,
+                        backgroundImage: `url("${book.imageLinks?.thumbnail || ''}")`,
                     }}
                 ></div>
                 <div className="book-shelf-changer">
-                    <select onChange={(e) => onMoveToShelf(book, e)} value={book.shelf || 'none'}>
+                    <select onChange={(e) => onMoveToShelf(book, e)} value={book?.shelf || 'none'}>
                         <option value="none" disabled>
                         Move to...
                         </option>
-                        <option value="currentlyReading">
-                            Currently Reading
-                        </option>
-                        <option value="wantToRead">Want to Read</option>
-                        <option value="read">Read</option>
+                        {
+                            availableShelves.map(shelf => {
+                                return <option key={shelf.id} value={shelf.id}>{ shelf.label }</option>
+                            })
+                        }
                         <option value="none">None</option>
                     </select>
                 </div>
@@ -35,5 +36,10 @@ const BookItem = ({ book, onMoveToShelf }) => {
         </div>
     );
 }
+
+BookItem.propTypes = {
+    onMoveToShelf: PropTypes.func.isRequired,
+    book: PropTypes.any.isRequired,
+};
 
 export default BookItem;
