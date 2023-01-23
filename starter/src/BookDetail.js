@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import * as BooksApi from "./BooksAPI"
 import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
+import {availableShelves} from "./constants"
 
 const BookDetail = ({ onMoveToShelf }) => {
     let { id } = useParams();
@@ -55,14 +56,14 @@ const BookDetail = ({ onMoveToShelf }) => {
             {book &&
                 <div className="book-detail-shelf-changer">
                 <select onChange={(e) => onMoveToShelf(book, e)} value={book.shelf || 'none'}>
-                    <option value="none" disabled>
+                    <option value="" disabled>
                     Move to...
                     </option>
-                    <option value="currentlyReading">
-                        Currently Reading
-                    </option>
-                    <option value="wantToRead">Want to Read</option>
-                    <option value="read">Read</option>
+                    {
+                            availableShelves.map(shelf => {
+                                return <option key={shelf.id} value={shelf.id}>{ shelf.label }</option>
+                            })
+                        }
                     <option value="none">None</option>
                 </select>
             </div>
