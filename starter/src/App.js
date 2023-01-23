@@ -28,9 +28,8 @@ function App() {
 
     if(bookIndex >= 0){
       newBookState[bookIndex].shelf = e.target.value;
-      console.log(newBookState[bookIndex]);
     }else{
-      newBookState.concat([{ ...book, shelf: e.target.value }]);
+      newBookState = newBookState.concat([{ ...book, shelf: e.target.value }]);
     }
 
     setBooks([...newBookState]);
